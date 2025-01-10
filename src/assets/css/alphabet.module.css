@@ -1,0 +1,51 @@
+.body {
+  background: rgb(56, 95, 190);
+  background: linear-gradient(0deg,
+      rgba(56, 95, 190, 1) 2%,
+      rgba(229, 235, 242, 1) 42%,
+      rgba(204, 98, 98, 1) 96%);
+  height: 100vh;
+}
+
+.back-button {
+  --tw-bg-opacity: 1;
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px;
+  cursor: pointer;
+
+}
+
+.back-button:hover {
+  --tw-bg-opacity: 0.8;
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+}
+
+.text-header {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.alphabet {
+  padding: 10px;
+  background-color: #d3d3d3;
+  text-align: center;
+  margin: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  height: auto;
+}
+
+.left {
+  flex-basis: 28%;
+}
+
+.right {
+  flex-basis: 18%;
+}
+
+.alphabet:hover {
+  background-color: #e9e9e9;
+}

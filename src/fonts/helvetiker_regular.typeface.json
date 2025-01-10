@@ -1,0 +1,13 @@
+{
+  "font": {
+    "typeface": "helvetiker",
+    "weight": "regular",
+    "size": 36,
+    "height": 10,
+    "curveSegments": 12,
+    "bevelEnabled": false,
+    "bevelThickness": 0,
+    "bevelSize": 0,
+    "bevelSegments": 0
+  }
+}
