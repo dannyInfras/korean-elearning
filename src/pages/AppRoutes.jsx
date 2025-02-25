@@ -9,6 +9,8 @@ import Alphabetic from "../components/Alphabetic";
 import WordGame from "./WordGame";
 import PlayHard from "./PlayHard";
 import Trailer from "./WordGame/trailer";
+import KoreanCoursesPage from "./Course";
+import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
 function AppRoutes() {
   return (
     <Routes>
@@ -22,6 +24,11 @@ function AppRoutes() {
       <Route path="/trailer2" element={<Trailer></Trailer>} />
       <Route path="/sadstory" element={<SadStory></SadStory>} />
       <Route path="404" element={<NotFound />} />
+      <Route path="/course" element={<KoreanCoursesPage></KoreanCoursesPage>} />
+      <Route
+        path="/course/korean-course-detail"
+        element={<KoreanCourseDetailPage></KoreanCourseDetailPage>}
+      />
     </Routes>
   );
 }

@@ -148,6 +148,16 @@ const Navbar = ({ active }) => {
               >
                 Play hard
               </span>
+              <span
+                className={`${
+                  activeItem === "course"
+                    ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                    : "pr-2 pl-2 cursor-pointer"
+                }`}
+                onClick={() => handleMenuItemClick("course", "/course")}
+              >
+                Course
+              </span>
             </div>
           </div>
         </div>
@@ -197,6 +207,16 @@ const Navbar = ({ active }) => {
                 onClick={() => handleMenuItemClick("play", "/play")}
               >
                 Play hard
+              </span>
+              <span
+                className={`${
+                  activeItem === "course"
+                    ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                    : "pr-2 pl-2 cursor-pointer"
+                }`}
+                onClick={() => handleMenuItemClick("course", "/course")}
+              >
+                Course
               </span>
             </div>
           </div>
