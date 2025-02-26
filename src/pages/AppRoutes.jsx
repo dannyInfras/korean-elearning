@@ -8,6 +8,7 @@ import SadStory from "./SadStory/trailer";
 import Alphabetic from "../components/Alphabetic";
 import WordGame from "./WordGame";
 import PlayHard from "./PlayHard";
+import FlipCardGame from "./FlipPicture";
 import Trailer from "./WordGame/trailer";
 function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ function AppRoutes() {
       <Route path="/play" element={<PlayHard></PlayHard>} />
       <Route path="/trailer2" element={<Trailer></Trailer>} />
       <Route path="/sadstory" element={<SadStory></SadStory>} />
+      <Route path="/flipCard" element={<FlipCardGame></FlipCardGame>} />
       <Route path="404" element={<NotFound />} />
     </Routes>
   );

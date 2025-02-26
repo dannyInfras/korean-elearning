@@ -30,7 +30,7 @@ export default function Scene() {
   const { season } = useTheme();
   const [step, setStep] = useState(0);
   const handleSkip = () => {
-    window.location.href = "/wordgame";
+    window.location.href = "/flipCard";
   };
 
   const handleNext = () => {
@@ -96,7 +96,7 @@ export default function Scene() {
         setBoyStyle({ left: "30%", opacity: 1 });
         break;
       case 15:
-        window.location.href = "/wordgame";
+        window.location.href = "/flipCard";
         break;
       default:
         break;
