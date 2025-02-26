@@ -119,31 +119,37 @@ const Navbar = ({ active }) => {
               className={`w-full flex gap-2 items-center rounded-2xl font-light shadow-lg cursor-pointer text-sx `}
             >
               <span
-                className={`${
-                  activeItem === "home"
+                className={`${activeItem === "home"
                     ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pl-2 pr-2 cursor-pointer"
-                }`}
+                  }`}
                 onClick={() => handleMenuItemClick("home", "/home")}
               >
                 Home
               </span>
               <span
-                className={`${
-                  activeItem === "work"
+                className={`${activeItem === "work"
                     ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                }`}
+                  }`}
                 onClick={() => handleMenuItemClick("work", "/learn")}
               >
                 Work hard
               </span>
               <span
-                className={`${
-                  activeItem === "play"
+                className={`${activeItem === "package"
+                    ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                    : "pr-2 pl-2 cursor-pointer"
+                  }`}
+                onClick={() => handleMenuItemClick("package", "/package")}
+              >
+                Package
+              </span>
+              <span
+                className={`${activeItem === "play"
                     ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                }`}
+                  }`}
                 onClick={() => handleMenuItemClick("play", "/play")}
               >
                 Play hard
@@ -168,32 +174,29 @@ const Navbar = ({ active }) => {
             </div>
             <div className="flex flex-col gap-4">
               <span
-                className={`${
-                  activeItem === "home"
+                className={`${activeItem === "home"
                     ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pl-2 pr-2 cursor-pointer"
-                }`}
+                  }`}
                 onClick={() => handleMenuItemClick("home", "/home")}
               >
                 Home
               </span>
               <span
-                className={`${
-                  activeItem === "work"
+                className={`${activeItem === "work"
                     ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                }`}
+                  }`}
                 onClick={() => handleMenuItemClick("work", "/learn")}
               >
                 Work hard
               </span>
 
               <span
-                className={`${
-                  activeItem === "play"
+                className={`${activeItem === "play"
                     ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                }`}
+                  }`}
                 onClick={() => handleMenuItemClick("play", "/play")}
               >
                 Play hard
