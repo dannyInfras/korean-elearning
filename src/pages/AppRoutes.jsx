@@ -10,6 +10,8 @@ import WordGame from "./WordGame";
 import PlayHard from "./PlayHard";
 import FlipCardGame from "./FlipPicture";
 import Trailer from "./WordGame/trailer";
+import KoreanCoursesPage from "./Course";
+import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
 import Login from "./Auth/Login"; 
 import Register from "./Auth/Register";  
 
@@ -29,6 +31,11 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />  
       <Route path="/register" element={<Register />} /> 
       <Route path="404" element={<NotFound />} />
+      <Route path="/course" element={<KoreanCoursesPage></KoreanCoursesPage>} />
+      <Route
+        path="/course/korean-course-detail"
+        element={<KoreanCourseDetailPage></KoreanCourseDetailPage>}
+      />
     </Routes>
   );
 }
