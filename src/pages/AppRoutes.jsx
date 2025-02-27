@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router";
+import { Route, Routes } from "react-router";
 import NotFound from "./NotFound";
 import Home from "./Home";
 import LearnHome from "./LearnHome";
@@ -12,6 +12,9 @@ import FlipCardGame from "./FlipPicture";
 import Trailer from "./WordGame/trailer";
 import KoreanCoursesPage from "./Course";
 import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
+import Login from "./Auth/Login"; 
+import Register from "./Auth/Register";  
+
 function AppRoutes() {
   return (
     <Routes>
@@ -25,6 +28,8 @@ function AppRoutes() {
       <Route path="/trailer2" element={<Trailer></Trailer>} />
       <Route path="/sadstory" element={<SadStory></SadStory>} />
       <Route path="/flipCard" element={<FlipCardGame></FlipCardGame>} />
+      <Route path="/login" element={<Login />} />  
+      <Route path="/register" element={<Register />} /> 
       <Route path="404" element={<NotFound />} />
       <Route path="/course" element={<KoreanCoursesPage></KoreanCoursesPage>} />
       <Route
