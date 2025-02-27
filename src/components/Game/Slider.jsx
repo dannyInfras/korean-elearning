@@ -14,11 +14,17 @@ const Slider = () => {
   const { season } = useTheme();
   const [slides, setSlides] = useState([
     {
+      img: anh3,
+      title: "Flip card Game",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti temporibus quis eum consequuntur .",
+      link: "/trailer2",
+    },
+    {
       img: game1,
       title: "Word Game",
       description:
         " Word game is a game that helps people improve their new words by guessing a new word.",
-      link: "/trailer2",
     },
     {
       img: anh2,
@@ -26,13 +32,7 @@ const Slider = () => {
       description:
         "Weld letters will fall from above and the player must enter the correct letters on the screen.",
       link: "/sadstory",
-    },
-    {
-      img: anh3,
-      title: "Bubble Game",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti temporibus quis eum consequuntur .",
-    },
+    }
   ]);
 
   const nextSlide = () => {
