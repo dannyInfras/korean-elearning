@@ -8,13 +8,26 @@ import SadStory from "./SadStory/trailer";
 import Alphabetic from "../components/Alphabetic";
 import WordGame from "./WordGame";
 import PlayHard from "./PlayHard";
+import FlipCardGame from "./FlipPicture";
 import Trailer from "./WordGame/trailer";
+<<<<<<< HEAD
 import Login from "./Auth/Login"; 
 import Register from "./Auth/Register";  
+=======
+import KoreanCoursesPage from "./Course";
+import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
+import Login from "./Auth/Login"; 
+import Register from "./Auth/Register";  
+import FinishPayment from "../components/FinishPayment";
+import Success from "../components/Success";
+import Cancel from "../components/Cancel";
+import Package from "./Package";
+>>>>>>> main
 
 function AppRoutes() {
   return (
     <Routes>
+<<<<<<< HEAD
       <Route path="/*" element={<Home />} />
       <Route path="/alphabet" element={<Alphabetic />} />
       <Route path="/home" element={<Home />} />
@@ -26,7 +39,30 @@ function AppRoutes() {
       <Route path="/sadstory" element={<SadStory />} />
       <Route path="/login" element={<Login />} />  
       <Route path="/register" element={<Register />} /> 
+=======
+      <Route path="/*" element={<Home></Home>} />
+      <Route path="/alphabet" element={<Alphabetic></Alphabetic>} />
+      <Route path="/home" element={<Home></Home>} />
+      <Route path="/learn" element={<LearnHome></LearnHome>} />
+      <Route path="/trailer" element={<Scene></Scene>} />
+      <Route path="/wordgame" element={<WordGame></WordGame>} />
+      <Route path="/play" element={<PlayHard></PlayHard>} />
+      <Route path="/trailer2" element={<Trailer></Trailer>} />
+      <Route path="/sadstory" element={<SadStory></SadStory>} />
+      <Route path="/flipCard" element={<FlipCardGame></FlipCardGame>} />
+      <Route path="/login" element={<Login />} />  
+      <Route path="/register" element={<Register />} />
+      <Route path="/package" element={<Package></Package>} />
+      <Route path="/finish" element={<FinishPayment />} />
+      <Route path="/success" element={<Success />} />
+      <Route path="/cancel" element={<Cancel />} />
+>>>>>>> main
       <Route path="404" element={<NotFound />} />
+      <Route path="/course" element={<KoreanCoursesPage></KoreanCoursesPage>} />
+      <Route
+        path="/course/korean-course-detail"
+        element={<KoreanCourseDetailPage></KoreanCourseDetailPage>}
+      />
     </Routes>
   );
 }
