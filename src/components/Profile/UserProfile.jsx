@@ -9,7 +9,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users")
+      .get("https://exekoreanapi-production.up.railway.app/user")
       .then((response) => {
         setUser(response.data);
         setUpdatedUser(response.data);
@@ -34,7 +34,7 @@ const UserProfile = () => {
     if (!confirm) return;
 
     try {
-      await axios.put(`http://localhost:3000/users/${user?._id}`, updatedUser);
+      await axios.put(`https://exekoreanapi-production.up.railway.app/user/${user?._id}`, updatedUser);
       setUser(updatedUser);
       setIsEditing(false);
       alert("Cập nhật thành công!");

@@ -18,7 +18,7 @@ function Login() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const response = await fetch("https://exekoreanapi-production.up.railway.app/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -43,7 +43,7 @@ function Login() {
   }
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000/auth/google";
+    window.location.href = "https://exekoreanapi-production.up.railway.app/auth/google";
   };
 
   useEffect(() => {
