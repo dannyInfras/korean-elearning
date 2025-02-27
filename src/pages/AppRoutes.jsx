@@ -14,6 +14,10 @@ import KoreanCoursesPage from "./Course";
 import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
 import Login from "./Auth/Login"; 
 import Register from "./Auth/Register";  
+import FinishPayment from "../components/FinishPayment";
+import Success from "../components/Success";
+import Cancel from "../components/Cancel";
+import Package from "./Package";
 
 function AppRoutes() {
   return (
@@ -29,7 +33,11 @@ function AppRoutes() {
       <Route path="/sadstory" element={<SadStory></SadStory>} />
       <Route path="/flipCard" element={<FlipCardGame></FlipCardGame>} />
       <Route path="/login" element={<Login />} />  
-      <Route path="/register" element={<Register />} /> 
+      <Route path="/register" element={<Register />} />
+      <Route path="/package" element={<Package></Package>} />
+      <Route path="/finish" element={<FinishPayment />} />
+      <Route path="/success" element={<Success />} />
+      <Route path="/cancel" element={<Cancel />} />
       <Route path="404" element={<NotFound />} />
       <Route path="/course" element={<KoreanCoursesPage></KoreanCoursesPage>} />
       <Route

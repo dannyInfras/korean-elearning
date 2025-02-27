@@ -18,39 +18,39 @@ const PackageList = () => {
     const packages = [
         {
             id: 1,
-            duration: "📅 1 Tháng",
-            title: "Gói Khởi Động Nhanh",
+            duration: "📅 1 Month",
+            title: "Quick Start Package",
             description: [
-                "Lựa chọn lý tưởng cho người mới bắt đầu học tiếng Hàn.",
-                "Trải nghiệm các bài học tương tác mà không có rủi ro.",
+                "An ideal choice for beginners learning Korean.",
+                "Experience interactive lessons with no risk.",
             ],
-            note: "Dành cho ai muốn thử nghiệm và làm quen với lộ trình học.",
-            price: 2000,
+            note: "Suitable for those who want to try and get familiar with the learning path.",
+            price: 120000,
         },
         {
             id: 2,
-            duration: "📅 6 Tháng",
-            title: "Gói Giá Trị Tốt Nhất",
+            duration: "📅 6 Months",
+            title: "Best Value Package",
             description: [
-                "🔥 (Phổ biến nhất!)",
-                "Lộ trình học tập rõ ràng giúp ghi nhớ và tiến bộ nhanh hơn.",
-                "Cam kết lâu dài giúp bạn duy trì động lực học tập.",
-                "Tiết kiệm hơn so với gói hàng tháng!",
+                "🔥 (Most popular!)",
+                "A clear learning path to help you remember and progress faster.",
+                "A long-term commitment to keep you motivated.",
+                "More savings compared to the monthly package!",
             ],
-            note: "Thích hợp cho người học nghiêm túc muốn thấy sự tiến bộ thực sự.",
+            note: "Perfect for serious learners who want to see real progress.",
             price: 650000,
         },
         {
             id: 3,
-            duration: "📅 1 Năm",
-            title: "Gói Trải Nghiệm Tuyệt Vời Nhất",
+            duration: "📅 1 Year",
+            title: "Ultimate Experience Package",
             description: [
-                "🏆 (Ưu đãi tốt nhất!)",
-                "Truy cập toàn bộ nội dung bài học và tính năng cao cấp.",
-                "Không quảng cáo – giúp bạn tập trung 100% vào việc học!",
-                "Tiết kiệm lớn nhất – chỉ thanh toán một lần, học cả năm!",
+                "🏆 (Best deal!)",
+                "Access to all lesson content and premium features.",
+                "Ad-free – allowing you to focus 100% on learning!",
+                "Biggest savings – pay once, learn all year!",
             ],
-            note: "Lựa chọn tốt nhất cho những ai cam kết học tập dài hạn.",
+            note: "The best choice for those committed to long-term learning.",
             price: 1050000,
         },
     ];
@@ -71,8 +71,8 @@ const PackageList = () => {
     const handlePurchase = async () => {
         if (!userEmail || !emailRegex.test(userEmail)) {
             notification.error({
-                message: "Email không hợp lệ",
-                description: "Vui lòng nhập một địa chỉ email hợp lệ.",
+                message: "Invalid email",
+                description: "Please enter a valid email address.",
             });
             return;
         }
@@ -88,8 +88,8 @@ const PackageList = () => {
             window.location.href = response.data.checkoutUrl;
         } catch (error) {
             notification.error({
-                message: "Lỗi khi tạo thanh toán",
-                description: "Có lỗi xảy ra khi tạo liên kết thanh toán.",
+                message: "Error creating payment",
+                description: "An error occurred while generating the payment link.",
             });
         }
     };
@@ -149,7 +149,7 @@ const PackageList = () => {
                 <StarsCanvas />
                 <div className="pt-20 md:mx-auto min-h-screen p-6">
                     <h1 className={`mb-6 text-center text-4xl font-bold ${season}-text-gradient`}>
-                        📦 Gói Học Tập
+                        📦Learning Package
                     </h1>
 
                     {/* Verification Form */}
@@ -166,7 +166,7 @@ const PackageList = () => {
                             className="w-full h-12 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition duration-300"
                             onClick={handleVerifyOrderCode}
                         >
-                            Xác minh mã đơn hàng
+                          Verify order code
                         </Button>
                     </div>
 
@@ -189,7 +189,7 @@ const PackageList = () => {
                                     </ul>
                                     <p className="text-sm italic text-gray-500 mt-2">📌 {item.note}</p>
                                     <p className="font-bold text-xl mt-4 text-green-600 w-[100%] absolute bottom-0">
-                                        Giá: {item.price.toLocaleString()} VND
+                                        Price: {item.price.toLocaleString()} VND
                                     </p>
                                 </div>
                                 <Button
@@ -197,7 +197,7 @@ const PackageList = () => {
                                     className="mt-4 w-full h-12 flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500 text-white font-semibold rounded-lg transition duration-300"
                                     onClick={() => showTransactionModal(item)}
                                 >
-                                    Mua Ngay
+                                    Buy Now
                                 </Button>
                             </Card>
                         ))}
@@ -224,13 +224,13 @@ const PackageList = () => {
                                     className="mt-4 w-full h-12 flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-300"
                                     onClick={handlePurchase}
                                 >
-                                    Tiến hành thanh toán
+                                    Make payment
                                 </Button>
                                 <Button
                                     className="mt-4 w-full h-12 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition duration-300"
                                     onClick={handleCancel}
                                 >
-                                    Hủy giao dịch
+                                   Cancel transaction
                                 </Button>
                             </div>
                         )}

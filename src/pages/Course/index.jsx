@@ -132,7 +132,7 @@ const KoreanCoursesPage = () => {
   
   return (
     <div className={`${season}-gradient min-h-screen`}>
-      <Navbar active="courses" />
+      <Navbar active="course" />
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">All Courses</h1>
         
