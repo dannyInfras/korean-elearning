@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router";
+import { Route, Routes } from "react-router";
 import NotFound from "./NotFound";
 import Home from "./Home";
 import LearnHome from "./LearnHome";
@@ -13,6 +13,13 @@ import FinishPayment from "../components/FinishPayment";
 import Trailer from "./WordGame/trailer";
 import Success from "../components/Success";
 import Cancel from "../components/Cancel";
+import FlipCardGame from "./FlipPicture";
+import Trailer from "./WordGame/trailer";
+import KoreanCoursesPage from "./Course";
+import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
+import Login from "./Auth/Login"; 
+import Register from "./Auth/Register";  
+
 function AppRoutes() {
   return (
     <Routes>
@@ -29,7 +36,15 @@ function AppRoutes() {
       <Route path="/finish" element={<FinishPayment />} />
       <Route path="/success" element={<Success />} />
       <Route path="/cancel" element={<Cancel />} />
+      <Route path="/flipCard" element={<FlipCardGame></FlipCardGame>} />
+      <Route path="/login" element={<Login />} />  
+      <Route path="/register" element={<Register />} /> 
       <Route path="404" element={<NotFound />} />
+      <Route path="/course" element={<KoreanCoursesPage></KoreanCoursesPage>} />
+      <Route
+        path="/course/korean-course-detail"
+        element={<KoreanCourseDetailPage></KoreanCourseDetailPage>}
+      />
     </Routes>
   );
 }
