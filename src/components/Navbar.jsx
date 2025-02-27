@@ -163,6 +163,15 @@ const Navbar = ({ active }) => {
               >
                 Package
               </span>
+              <span
+                className={`${activeItem === "login"
+                  ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                  : "pr-2 pl-2 cursor-pointer"
+                  }`}
+                onClick={() => handleMenuItemClick("login", "/login")}
+              >
+                Login
+              </span>
             </div>
           </div>
         </div>
