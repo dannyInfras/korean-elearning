@@ -12,12 +12,14 @@ import FlipCardGame from "./FlipPicture";
 import Trailer from "./WordGame/trailer";
 import KoreanCoursesPage from "./Course";
 import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
-import Login from "./Auth/Login"; 
-import Register from "./Auth/Register";  
+import Login from "./Auth/Login";
+import Register from "./Auth/Register";
 import FinishPayment from "../components/FinishPayment";
 import Success from "../components/Success";
 import Cancel from "../components/Cancel";
 import Package from "./Package";
+import { Blog } from "./Blog/Blog";
+import { BlogDetailPage } from "./BlogDetail/BlogDetail";
 
 function AppRoutes() {
   return (
@@ -35,6 +37,8 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />  
       <Route path="/register" element={<Register />} />
       <Route path="/package" element={<Package></Package>} />
+      <Route path="/blog" element={<Blog></Blog>} />
+      <Route path="/blog/:id" element={<BlogDetailPage></BlogDetailPage>} />
       <Route path="/finish" element={<FinishPayment />} />
       <Route path="/success" element={<Success />} />
       <Route path="/cancel" element={<Cancel />} />

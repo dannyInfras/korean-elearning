@@ -7,6 +7,10 @@ import { SoundProvider } from "./SoundCotext.js";
 import ThemeProvider from "./ThemeContext.js";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
