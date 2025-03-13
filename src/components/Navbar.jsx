@@ -163,6 +163,16 @@ const Navbar = ({ active }) => {
               >
                 Package
               </span>
+              <span
+                className={`${
+                  activeItem === "blog"
+                    ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                    : "pl-2 pr-2 cursor-pointer"
+                }`}
+                onClick={() => handleMenuItemClick("blog", "/blog")}
+              >
+                Blog
+              </span>
             </div>
           </div>
         </div>
