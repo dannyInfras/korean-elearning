@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./UserProfile.css";
+import "./UserProfile.css"; // Import file CSS
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -14,38 +14,32 @@ const UserProfile = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: "john@example.com",
-          password: "yourpassword",
-        }),
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error("Lỗi khi lấy token!");
+      }
 
-      if (response.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        setToken(data.token);
-      } else {
-        alert("Không nhận được token!");
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+        setToken(data.access_token);
       }
     } catch (error) {
       console.error("Lỗi khi lấy token:", error);
-      alert("Lỗi khi lấy token!");
+      alert("Không thể lấy token!");
     }
   };
 
   const fetchUserProfile = async (token) => {
     try {
-      const response = await fetch("http://localhost:3000/user/profile", {
+      const response = await fetch("http://localhost:3000/auth/profile", {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (!response.ok) {
-        throw new Error("Không thể lấy thông tin user!");
+        throw new Error("Lỗi khi lấy thông tin user!");
       }
 
       const data = await response.json();
@@ -61,7 +55,7 @@ const UserProfile = () => {
     if (!updatedUser || !token) return;
 
     const confirmUpdate = window.confirm("Bạn có chắc chắn muốn cập nhật thông tin không?");
-    if (!confirm) return;
+    if (!confirmUpdate) return;
 
     try {
       const response = await fetch("http://localhost:3000/user/profile", {
@@ -83,16 +77,16 @@ const UserProfile = () => {
       setIsEditing(false);
       alert("Cập nhật thông tin thành công!");
     } catch (error) {
-      console.error("Lỗi khi cập nhật user:", error);
+      console.error("Lỗi khi cập nhật thông tin user:", error);
       alert("Không thể cập nhật thông tin user!");
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token) {
       fetchToken();
     } else {
-      fetchUser();
+      fetchUserProfile(token);
     }
   }, [token]);
 
@@ -104,7 +98,7 @@ const UserProfile = () => {
     <div className="user-profile">
       <h2>User Profile</h2>
       <label>
-        Name:
+        Tên:
         <input
           type="text"
           name="name"
@@ -121,17 +115,11 @@ const UserProfile = () => {
       <br />
       {isEditing ? (
         <>
-          <button className="confirm-btn" onClick={handleConfirmUpdate}>
-            Xác nhận
-          </button>
-          <button className="cancel-btn" onClick={() => setIsEditing(false)}>
-            Hủy
-          </button>
+          <button className="confirm-btn" onClick={updateUser}>Xác nhận</button>
+          <button className="cancel-btn" onClick={() => setIsEditing(false)}>Hủy</button>
         </>
       ) : (
-        <button className="update-btn" onClick={handleEdit}>
-          Cập nhật
-        </button>
+        <button className="update-btn" onClick={() => setIsEditing(true)}>Cập nhật</button>
       )}
     </div>
   );
