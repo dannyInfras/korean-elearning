@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://exekoreanapi-production.up.railway.app";
 axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
