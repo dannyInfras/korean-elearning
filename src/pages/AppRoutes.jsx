@@ -12,13 +12,15 @@ import FlipCardGame from "./FlipPicture";
 import Trailer from "./WordGame/trailer";
 import KoreanCoursesPage from "./Course";
 import KoreanCourseDetailPage from "./Course/KoreanCourseDetailPage";
-import Login from "./Auth/Login"; 
-import Register from "./Auth/Register";  
-import UserProfile from "../components/Profile/UserProfile";
+import Login from "./Auth/Login";
+import Register from "./Auth/Register";
 import FinishPayment from "../components/FinishPayment";
 import Success from "../components/Success";
 import Cancel from "../components/Cancel";
 import Package from "./Package";
+import UserProfile from "../components/Profile/UserProfile";
+import { Blog } from "./Blog/Blog";
+import { BlogDetailPage } from "./BlogDetail/BlogDetail";
 
 function AppRoutes() {
   return (
@@ -35,9 +37,11 @@ function AppRoutes() {
       <Route path="/flipCard" element={<FlipCardGame></FlipCardGame>} />
       <Route path="/login" element={<Login />} />  
       <Route path="/register" element={<Register />} />
-      <Route path="/user" element={<UserProfile></UserProfile>} />
       <Route path="/package" element={<Package></Package>} />
+      <Route path="/blog" element={<Blog></Blog>} />
+      <Route path="/blog/:id" element={<BlogDetailPage></BlogDetailPage>} />
       <Route path="/finish" element={<FinishPayment />} />
+      <Route path="/user" element={<UserProfile></UserProfile>} />
       <Route path="/success" element={<Success />} />
       <Route path="/cancel" element={<Cancel />} />
       <Route path="404" element={<NotFound />} />

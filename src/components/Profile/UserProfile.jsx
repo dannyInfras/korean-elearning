@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./UserProfile.css";
+import "./UserProfile.css"; // Import file CSS
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -11,61 +11,55 @@ const UserProfile = () => {
     try {
       const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: "john@example.com",
-          password: "yourpassword",
-        }),
+        headers: { "Content-Type": "application/json" },
       });
 
-      const data = await response.json();
+      if (!response.ok) throw new Error("Lỗi khi lấy token!");
 
-      if (response.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        setToken(data.token);
-      } else {
-        alert("Không nhận được token!");
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+        setToken(data.access_token);
       }
     } catch (error) {
       console.error("Lỗi khi lấy token:", error);
-      alert("Lỗi khi lấy token!");
+      alert("Không thể lấy token!");
     }
   };
 
-  const fetchUserProfile = async (token) => {
+  const fetchUserProfile = async () => {
     try {
-      const response = await fetch("http://localhost:3000/user/profile", {
+      const response = await fetch("http://localhost:8000/users/profile", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
       });
 
-      if (!response.ok) {
-        throw new Error("Không thể lấy thông tin user!");
-      }
+      if (!response.ok) throw new Error("Lỗi khi lấy thông tin user!");
 
       const data = await response.json();
       setUser(data);
-      setUpdatedUser(data);
     } catch (error) {
-      console.error("Lỗi khi lấy thông tin user:", error);
-      alert("Không thể lấy thông tin user!");
+      console.error(error);
+      alert(error.message);
     }
   };
 
   const updateUser = async () => {
     if (!updatedUser || !token) return;
+    if (JSON.stringify(updatedUser) === JSON.stringify(user)) {
+      alert("Bạn chưa thay đổi thông tin nào!");
+      return;
+    }
 
     const confirmUpdate = window.confirm("Bạn có chắc chắn muốn cập nhật thông tin không?");
-    if (!confirm) return;
+    if (!confirmUpdate) return;
 
     try {
-      const response = await fetch("http://localhost:3000/user/profile", {
-        method: "PATCH",
+      const response = await fetch("http://localhost:3000/users/profile", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -73,38 +67,33 @@ const UserProfile = () => {
         body: JSON.stringify(updatedUser),
       });
 
-      if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi cập nhật!");
-      }
+      if (!response.ok) throw new Error("Có lỗi xảy ra khi cập nhật!");
 
       const data = await response.json();
       setUser(data);
-      setUpdatedUser(data);
       setIsEditing(false);
       alert("Cập nhật thông tin thành công!");
     } catch (error) {
-      console.error("Lỗi khi cập nhật user:", error);
+      console.error("Lỗi khi cập nhật thông tin user:", error);
       alert("Không thể cập nhật thông tin user!");
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token) {
       fetchToken();
     } else {
-      fetchUser();
+      fetchUserProfile();
     }
   }, [token]);
 
-  if (!user) {
-    return <p>Loading...</p>;
-  }
+  if (!user) return <p>Loading...</p>;
 
   return (
     <div className="user-profile">
       <h2>User Profile</h2>
       <label>
-        Name:
+        Tên:
         <input
           type="text"
           name="name"
@@ -116,22 +105,19 @@ const UserProfile = () => {
       <br />
       <label>
         Email:
-        <input type="text" name="email" value={updatedUser?.email || ""} disabled />
+        <input type="text" name="email" value={user.email} disabled />
       </label>
       <br />
       {isEditing ? (
         <>
-          <button className="confirm-btn" onClick={handleConfirmUpdate}>
-            Xác nhận
-          </button>
-          <button className="cancel-btn" onClick={() => setIsEditing(false)}>
-            Hủy
-          </button>
+          <button className="confirm-btn" onClick={updateUser}>Xác nhận</button>
+          <button className="cancel-btn" onClick={() => setIsEditing(false)}>Hủy</button>
         </>
       ) : (
-        <button className="update-btn" onClick={handleEdit}>
-          Cập nhật
-        </button>
+        <button className="update-btn" onClick={() => {
+          setUpdatedUser(user);
+          setIsEditing(true);
+        }}>Cập nhật</button>
       )}
     </div>
   );

@@ -17,6 +17,29 @@ const Navbar = ({ active }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  // State kiểm tra đăng nhập
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedUsername = localStorage.getItem("username");
+    if (token) {
+      setIsLoggedIn(true);
+      setUsername(storedUsername || "User");
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  // Hàm logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+
   const playHoverSound = (audioRef) => {
     if (audioRef.current && isSoundEnabled) {
       audioRef.current.currentTime = 0;
@@ -24,6 +47,7 @@ const Navbar = ({ active }) => {
     }
   };
 
+  // Hàm xử lý cho các mục menu
   const handleMenuItemClick = (item, path) => {
     setActiveItem(item);
     playHoverSound(navClickRef);
@@ -48,23 +72,23 @@ const Navbar = ({ active }) => {
     switch (season) {
       case "spring":
         setBackgroundColor("bg-pink-300");
-        setBorderColor("border-pink-800");
+        setBorderColor("pink-800");
         break;
       case "summer":
         setBackgroundColor("bg-green-300");
-        setBorderColor("border-green-800");
+        setBorderColor("green-800");
         break;
       case "fall":
         setBackgroundColor("bg-orange-300");
-        setBorderColor("border-orange-800");
+        setBorderColor("orange-800");
         break;
       case "winter":
         setBackgroundColor("bg-blue-300");
-        setBorderColor("border-blue-800");
+        setBorderColor("blue-800");
         break;
       default:
         setBackgroundColor("bg-green-300");
-        setBorderColor("border-green-800");
+        setBorderColor("green-800");
         break;
     }
   }, [season]);
@@ -88,10 +112,32 @@ const Navbar = ({ active }) => {
       break;
   }
 
+  // Span cho mục login/logout được thiết kế giống như các mục menu khác
+  const renderAuthItem = () => {
+    return (
+      <span
+        className={`${
+          activeItem === "account"
+            ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+            : "pl-2 pr-2 cursor-pointer"
+        }`}
+        onClick={() => {
+          if (isLoggedIn) {
+            handleLogout();
+          } else {
+            handleMenuItemClick("account", "/login");
+          }
+        }}
+      >
+        {isLoggedIn ? "Logout" : "Login"}
+      </span>
+    );
+  };
+
   return (
     <>
       <nav
-        className={`${styles.paddingX} w-full flex items-center fixed top-4 z-20 max-md:px-1 `}
+        className={`${styles.paddingX} w-full flex items-center fixed top-4 z-20 max-md:px-1`}
       >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto animate-[slidedown_2s_cubic-bezier(.19,1,.22,1)_forwards]">
           <Link
@@ -115,50 +161,56 @@ const Navbar = ({ active }) => {
             <div className="flex h-min items-center">
               <Sound />
             </div>
+
             <div
-              className={`w-full flex gap-2 items-center rounded-2xl font-light shadow-lg cursor-pointer text-sx `}
+              className={`w-full flex gap-2 items-center rounded-2xl font-light shadow-lg cursor-pointer text-sx`}
             >
               <span
-                className={`${activeItem === "home"
+                className={`${
+                  activeItem === "home"
                     ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pl-2 pr-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("home", "/home")}
               >
                 Home
               </span>
               <span
-                className={`${activeItem === "work"
+                className={`${
+                  activeItem === "work"
                     ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("work", "/learn")}
               >
                 Work hard
               </span>
               <span
-                className={`${activeItem === "play"
+                className={`${
+                  activeItem === "play"
                     ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("play", "/play")}
               >
                 Play hard
               </span>
               <span
-                className={`${activeItem === "course"
+                className={`${
+                  activeItem === "course"
                     ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("course", "/course")}
               >
                 Course
               </span>
               <span
-                className={`${activeItem === "package"
-                  ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
-                  : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                className={`${
+                  activeItem === "package"
+                    ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                    : "pr-2 pl-2 cursor-pointer"
+                }`}
                 onClick={() => handleMenuItemClick("package", "/package")}
               >
                 Package
@@ -172,6 +224,18 @@ const Navbar = ({ active }) => {
               >
                 Profile
               </span>
+              <span
+                className={`${
+                  activeItem === "blog"
+                    ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                    : "pl-2 pr-2 cursor-pointer"
+                }`}
+                onClick={() => handleMenuItemClick("blog", "/blog")}
+              >
+                Blog
+              </span>
+            
+              {renderAuthItem()}
             </div>
           </div>
         </div>
@@ -192,52 +256,56 @@ const Navbar = ({ active }) => {
             </div>
             <div className="flex flex-col gap-4">
               <span
-                className={`${activeItem === "home"
+                className={`${
+                  activeItem === "home"
                     ? `bg-${borderColor} cursor-pointer text-sx rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pl-2 pr-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("home", "/home")}
               >
                 Home
               </span>
               <span
-                className={`${activeItem === "work"
+                className={`${
+                  activeItem === "work"
                     ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("work", "/learn")}
               >
                 Work hard
               </span>
-
               <span
-                className={`${activeItem === "play"
+                className={`${
+                  activeItem === "play"
                     ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("play", "/play")}
               >
                 Play hard
               </span>
               <span
-                className={`${activeItem === "course"
+                className={`${
+                  activeItem === "course"
                     ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                     : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                }`}
                 onClick={() => handleMenuItemClick("course", "/course")}
               >
                 Course
               </span>
               <span
-                className={`${activeItem === "package"
-                  ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
-                  : "pr-2 pl-2 cursor-pointer"
-                  }`}
+                className={`${
+                  activeItem === "package"
+                    ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
+                    : "pr-2 pl-2 cursor-pointer"
+                }`}
                 onClick={() => handleMenuItemClick("package", "/package")}
               >
                 Package
               </span>
-              <span
+                            <span
                 className={`${activeItem === "user"
                   ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                   : "pr-2 pl-2 cursor-pointer"
@@ -246,6 +314,7 @@ const Navbar = ({ active }) => {
               >
                 Profile
               </span>
+              {renderAuthItem()}
             </div>
           </div>
         </div>
