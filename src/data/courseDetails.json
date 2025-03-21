@@ -1,0 +1,111 @@
+{
+  "koreanCourse": {
+    "id": 1,
+    "title": "TOPIK II Test – Listening & Writing",
+    "description": "Master the TOPIK II test with our comprehensive course focusing on listening and writing sections. Perfect for intermediate to advanced Korean learners preparing for the official exam.",
+    "price": "$49.99 / month",
+    "discountedPrice": "$99.99",
+    "discount": "$79.99 / year",
+    "savings": "20%",
+    "aboutTitle": "About This Course",
+    "aboutSubtitle": "Prepare for the TOPIK II Test with Confidence",
+    "aboutDescription": "This course is designed to help intermediate to advanced Korean learners prepare specifically for the listening and writing sections of the TOPIK II test. Through structured lessons and practice exercises, you'll develop the skills needed to excel in these challenging portions of the exam.",
+    "aboutDescription2": "Our experienced instructors will guide you through test-taking strategies, common question types, and provide detailed feedback on your writing to help you improve quickly.",
+    "targetLevelTitle": "Who is this course for?",
+    "targetLevelDescription": "This course is ideal for intermediate to advanced Korean learners (TOPIK level 3-6) who are preparing for the TOPIK II test. If you've already mastered basic Korean grammar and vocabulary and want to focus specifically on improving your listening comprehension and writing skills for the exam, this course is perfect for you.",
+    "achieveTitle": "What will you achieve?",
+    "achieveList": [
+      "Understand the format and requirements of the TOPIK II listening and writing sections",
+      "Learn effective strategies for approaching different question types",
+      "Practice with authentic test materials and receive detailed feedback",
+      "Improve your listening comprehension of various speech styles and topics",
+      "Develop your writing skills to meet the expectations of TOPIK II graders",
+      "Build confidence through regular practice tests and assessments"
+    ],
+    "courseContentTitle": "Course Content",
+    "courseContentList": [
+      "11 comprehensive lessons covering all aspects of the TOPIK II listening and writing sections",
+      "Over 30 practice exercises with detailed explanations",
+      "5 full-length mock tests with automated scoring and feedback",
+      "Downloadable study materials and vocabulary lists",
+      "Writing templates and sample answers for different question types",
+      "Audio recordings at various speeds to build listening comprehension"
+    ],
+    "tableOfContentsTitle": "Table of Contents",
+    "tableOfContentsList": [
+      {
+        "num": 1,
+        "title": "Introduction to TOPIK II Test Format and Scoring"
+      },
+      {
+        "num": 2,
+        "title": "Listening Section: Question Types and Strategies"
+      },
+      {
+        "num": 3,
+        "title": "Listening Practice: Conversations and Monologues"
+      },
+      {
+        "num": 4,
+        "title": "Listening Practice: News and Lectures"
+      },
+      {
+        "num": 5,
+        "title": "Writing Section: Short Answer Questions"
+      },
+      {
+        "num": 6,
+        "title": "Writing Section: Essay Structure and Organization"
+      },
+      {
+        "num": 7,
+        "title": "Writing Practice: Descriptive Essays"
+      },
+      {
+        "num": 8,
+        "title": "Writing Practice: Argumentative Essays"
+      },
+      {
+        "num": 9,
+        "title": "Vocabulary Building for TOPIK II"
+      },
+      {
+        "num": 10,
+        "title": "Grammar Review for Advanced Writing"
+      },
+      {
+        "num": 11,
+        "title": "Full Mock Test and Final Review"
+      }
+    ],
+    "reviewsTitle": "Reviews",
+    "reviewPlaceholder": "Write your review here...",
+    "postButton": "Post",
+    "reviews": [
+      {
+        "initials": "JK",
+        "name": "Ji-hoon Kim",
+        "date": "2 weeks ago",
+        "review": "This course was exactly what I needed to prepare for my TOPIK II exam. The instructors were knowledgeable and the practice exercises were very helpful."
+      },
+      {
+        "initials": "SL",
+        "name": "Sarah Lee",
+        "date": "1 month ago",
+        "review": "I really enjoyed the interactive lessons and the teacher's feedback was very helpful."
+      },
+      {
+        "initials": "MP",
+        "name": "Min-ji Park",
+        "date": "2 months ago",
+        "review": "This course is amazing! I've learned so much about Korean culture and language."
+      },
+      {
+        "initials": "TC",
+        "name": "Thomas Chen",
+        "date": "3 months ago",
+        "review": "The course was well-organized and the instructors were very supportive."
+      }
+    ]
+  }
+} 

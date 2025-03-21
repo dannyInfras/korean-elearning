@@ -305,7 +305,7 @@ const Navbar = ({ active }) => {
               >
                 Package
               </span>
-                            <span
+             <span
                 className={`${activeItem === "user"
                   ? `cursor-pointer rounded-2xl pl-2 pr-2 border-solid ${borderColor} border-2 flex h-max`
                   : "pr-2 pl-2 cursor-pointer"

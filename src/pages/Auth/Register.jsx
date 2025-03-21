@@ -11,26 +11,45 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { season } = useTheme();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setError(null);
+  
     if (password !== confirmPassword) {
-      alert("Passwords don't match!");
+      setError("Mật khẩu không khớp!");
       return;
     }
-    // Add registration logic here
-    navigate("/home");
+  
+    try {
+      const response = await fetch("https://exekoreanapi-production.up.railway.app/user", { 
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert("Đăng ký thành công!");
+        navigate("/login");
+      } else {
+        setError(data.message || "Đăng ký thất bại!");
+      }
+    } catch (err) {
+      setError("Lỗi hệ thống, vui lòng thử lại!");
+    }
   }
-
-  const handleGoogleSignup = () => {
-    // Add Google signup logic
-  };
-
-  const handleFacebookSignup = () => {
-    // Add Facebook signup logic
-  };
+  
+  
 
   return (
     <div className={`${season}-gradient min-h-screen`}>
@@ -47,6 +66,7 @@ function Register() {
             />
           </div>
           <h2 className="text-2xl font-bold mb-6 text-center">Create Account</h2>
+          {error && <p className="text-red-500 text-center">{error}</p>}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="name" className="block mb-1 font-medium">
@@ -100,11 +120,6 @@ function Register() {
                 required
               />
             </div>
-            <div className="text-sm text-right">
-              <Link to="/login" className="text-blue-600 hover:underline">
-                Already have an account? Sign in
-              </Link>
-            </div>
             <button
               type="submit"
               className={`w-full py-2 px-4 ${season}-button-gradient rounded-md text-white font-medium hover:opacity-90 transition-opacity`}
@@ -112,33 +127,10 @@ function Register() {
               Register
             </button>
           </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white/30 text-gray-500">Or sign up with</span>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <button
-                onClick={handleGoogleSignup}
-                className="flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                <FontAwesomeIcon icon={faGoogle} className="mr-2" />
-                Google
-              </button>
-              <button
-                onClick={handleFacebookSignup}
-                className="flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                <FontAwesomeIcon icon={faFacebook} className="mr-2" />
-                Facebook
-              </button>
-            </div>
+          <div className="text-sm text-right mt-3">
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Already have an account? Sign in
+            </Link>
           </div>
         </div>
       </div>

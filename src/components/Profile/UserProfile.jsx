@@ -9,7 +9,7 @@ const UserProfile = () => {
 
   const fetchToken = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch("http://exekoreanapi-production.up.railway.app/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
@@ -25,11 +25,23 @@ const UserProfile = () => {
       console.error("Lỗi khi lấy token:", error);
       alert("Không thể lấy token!");
     }
+  useEffect(() => {
+    axios
+      .get("https://exekoreanapi-production.up.railway.app/user")
+      .then((response) => {
+        setUser(response.data);
+        setUpdatedUser(response.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleUpdateClick = () => {
+    setIsEditing(true);
   };
 
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch("http://localhost:8000/users/profile", {
+      const response = await fetch("http://exekoreanapi-production.up.railway.app/users/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -58,7 +70,7 @@ const UserProfile = () => {
     if (!confirmUpdate) return;
 
     try {
-      const response = await fetch("http://localhost:3000/users/profile", {
+      const response = await fetch("http://exekoreanapi-production.up.railway.app/users/profile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
