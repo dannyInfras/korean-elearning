@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./UserProfile.css"; // Import file CSS
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
+  const fetchToken = async () => {
+    try {
+      const response = await fetch("http://exekoreanapi-production.up.railway.app/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) throw new Error("Lỗi khi lấy token!");
+
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+        setToken(data.access_token);
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy token:", error);
+      alert("Không thể lấy token!");
+    }
   useEffect(() => {
     axios
       .get("https://exekoreanapi-production.up.railway.app/user")
@@ -21,28 +39,65 @@ const UserProfile = () => {
     setIsEditing(true);
   };
 
-  const handleChange = (e) => {
-    if (updatedUser) {
-      setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
-    }
-  };
-
-  const handleConfirmUpdate = async () => {
-    if (!updatedUser) return;
-
-    const confirm = window.confirm("Bạn có chắc chắn muốn cập nhật thông tin không?");
-    if (!confirm) return;
-
+  const fetchUserProfile = async () => {
     try {
-      await axios.put(`https://exekoreanapi-production.up.railway.app/user/${user?._id}`, updatedUser);
-      setUser(updatedUser);
-      setIsEditing(false);
-      alert("Cập nhật thành công!");
+      const response = await fetch("http://exekoreanapi-production.up.railway.app/users/profile", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) throw new Error("Lỗi khi lấy thông tin user!");
+
+      const data = await response.json();
+      setUser(data);
     } catch (error) {
       console.error(error);
-      alert("Có lỗi xảy ra khi cập nhật!");
+      alert(error.message);
     }
   };
+
+  const updateUser = async () => {
+    if (!updatedUser || !token) return;
+    if (JSON.stringify(updatedUser) === JSON.stringify(user)) {
+      alert("Bạn chưa thay đổi thông tin nào!");
+      return;
+    }
+
+    const confirmUpdate = window.confirm("Bạn có chắc chắn muốn cập nhật thông tin không?");
+    if (!confirmUpdate) return;
+
+    try {
+      const response = await fetch("http://exekoreanapi-production.up.railway.app/users/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (!response.ok) throw new Error("Có lỗi xảy ra khi cập nhật!");
+
+      const data = await response.json();
+      setUser(data);
+      setIsEditing(false);
+      alert("Cập nhật thông tin thành công!");
+    } catch (error) {
+      console.error("Lỗi khi cập nhật thông tin user:", error);
+      alert("Không thể cập nhật thông tin user!");
+    }
+  };
+
+  useEffect(() => {
+    if (!token) {
+      fetchToken();
+    } else {
+      fetchUserProfile();
+    }
+  }, [token]);
 
   if (!user) return <p>Loading...</p>;
 
@@ -50,24 +105,31 @@ const UserProfile = () => {
     <div className="user-profile">
       <h2>User Profile</h2>
       <label>
-        Name:
-        <input type="text" name="name" value={updatedUser?.name || ""} onChange={handleChange} disabled={!isEditing} />
+        Tên:
+        <input
+          type="text"
+          name="name"
+          value={updatedUser?.name || ""}
+          onChange={(e) => setUpdatedUser({ ...updatedUser, name: e.target.value })}
+          disabled={!isEditing}
+        />
       </label>
+      <br />
       <label>
         Email:
-        <input type="email" name="email" value={updatedUser?.email || ""} onChange={handleChange} disabled={!isEditing} />
+        <input type="text" name="email" value={user.email} disabled />
       </label>
-      <label>
-        Phone:
-        <input type="tel" name="phone" value={updatedUser?.phone || ""} onChange={handleChange} disabled={!isEditing} />
-      </label>
+      <br />
       {isEditing ? (
         <>
-          <button className="confirm-btn" onClick={handleConfirmUpdate}>Xác nhận</button>
+          <button className="confirm-btn" onClick={updateUser}>Xác nhận</button>
           <button className="cancel-btn" onClick={() => setIsEditing(false)}>Hủy</button>
         </>
       ) : (
-        <button className="update-btn" onClick={handleUpdateClick}>Cập nhật</button>
+        <button className="update-btn" onClick={() => {
+          setUpdatedUser(user);
+          setIsEditing(true);
+        }}>Cập nhật</button>
       )}
     </div>
   );

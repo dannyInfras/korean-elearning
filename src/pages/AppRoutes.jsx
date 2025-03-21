@@ -18,6 +18,8 @@ import FinishPayment from "../components/FinishPayment";
 import Success from "../components/Success";
 import Cancel from "../components/Cancel";
 import Package from "./Package";
+import UserProfile from "../components/Profile/UserProfile";
+
 import { Blog } from "./Blog/Blog";
 import { BlogDetailPage } from "./BlogDetail/BlogDetail";
 
@@ -40,6 +42,7 @@ function AppRoutes() {
       <Route path="/blog" element={<Blog></Blog>} />
       <Route path="/blog/:id" element={<BlogDetailPage></BlogDetailPage>} />
       <Route path="/finish" element={<FinishPayment />} />
+      <Route path="/user" element={<UserProfile></UserProfile>} />
       <Route path="/success" element={<Success />} />
       <Route path="/cancel" element={<Cancel />} />
       <Route path="404" element={<NotFound />} />
