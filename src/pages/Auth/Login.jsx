@@ -34,6 +34,9 @@ function Login() {
   
       const data = await response.json();
       localStorage.setItem("token", data.access_token);
+      localStorage.setItem("username", email);
+      localStorage.setItem("name", data.name);
+      
   
       alert("Đăng nhập thành công!");
       navigate("/home");
@@ -117,8 +120,8 @@ function Login() {
             </button>
           </form>
 
-          {/* Nút đăng nhập bằng Google */}
-          <div className="mt-6 flex justify-center">
+         
+          {/* <div className="mt-6 flex justify-center">
             <button
               onClick={handleGoogleLogin}
               className="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
@@ -126,7 +129,7 @@ function Login() {
               <FontAwesomeIcon icon={faGoogle} className="mr-2" />
               Sign in with Google
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
